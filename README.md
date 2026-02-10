@@ -1,33 +1,60 @@
 # Airbnb Spark Pipeline
 
-An end-to-end batch data pipeline built using PySpark to process Airbnb listings and reviews data.
+An end-to-end **PySpark batch data pipeline** that processes Airbnb listings and reviews data to produce analytics-ready datasets.
 
-## Overview
-This project ingests Airbnb listings and reviews datasets, performs data cleaning, joins, aggregations, and derives multiple analytical outputs such as:
-- Reviews per listing
-- Average price by neighborhood and room type
-- Host-level listing counts
-- Availability distribution
-- Weekend vs weekday review activity
-- Sentiment analysis on review text
-- Basic data quality metrics
+This project demonstrates real-world data engineering patterns including data ingestion, cleaning, joins, aggregations, UDFs, Spark SQL, and batch output management.
 
-The pipeline is implemented as a single modular PySpark script, designed for batch execution and easy extension to orchestration tools like Airflow.
+---
+
+## Problem Statement
+Airbnb datasets are large, semi-structured, and span multiple entities (listings, hosts, reviews).  
+The goal of this pipeline is to transform raw CSV data into meaningful, queryable datasets that answer common business and analytics questions.
+
+---
+
+## What This Pipeline Does
+Using Apache Spark, the pipeline:
+
+- Cleans and standardizes listing and review data
+- Joins listings with reviews using listing identifiers
+- Computes review volume per listing
+- Calculates average prices by neighborhood and room type
+- Identifies top hosts by number of listings
+- Analyzes availability distribution
+- Separates weekend vs weekday review activity
+- Performs lightweight sentiment analysis on review text
+- Generates basic data quality metrics
+
+Each result is written as a separate output dataset.
+
+---
 
 ## Tech Stack
 - Python
 - Apache Spark (PySpark)
 - Spark SQL
-- UDFs & Broadcast Variables
+- User Defined Functions (UDFs)
+- Broadcast variables
+- Git & GitHub
+
+---
 
 ## Input Data
-- listings.csv.gz
-- reviews.csv.gz  
-(Data sourced from Inside Airbnb)
+The pipeline expects the following input files:
+
+- `listings.csv.gz`
+- `reviews.csv.gz`
+
+Data source: Inside Airbnb (public dataset)
+
+> Raw data files are intentionally excluded from this repository.
+
+---
 
 ## How to Run
+
 ```bash
 spark-submit airbnb_spark_pipeline.py \
-  --listings /data/listings.csv.gz \
-  --reviews  /data/reviews.csv.gz \
-  --output   /data/output
+  --listings ./data/listings.csv.gz \
+  --reviews  ./data/reviews.csv.gz \
+  --output   ./data/outpu
