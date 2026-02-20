@@ -57,4 +57,4 @@ Data source: Inside Airbnb (public dataset)
 spark-submit airbnb_spark_pipeline.py \
   --listings ./data/listings.csv.gz \
   --reviews  ./data/reviews.csv.gz \
-  --output   ./data/outpu
+  --output   ./data/output
